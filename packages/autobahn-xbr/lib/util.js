@@ -107,7 +107,7 @@ function pack_uint256 (value) {
 
 function uuid (value) {
 
-    if (value !== 'undefined') {
+    if (value) {
         // parse UUID string
 
         // if (typeof Buffer !== 'undefined') {
@@ -138,7 +138,22 @@ function uuid (value) {
 }
 
 
+function hexlify (arr_or_buf) {
+    if (global.process && global.process.versions.node) {
+        // running on Node
+        return '0x' + arr_or_buf.toString('hex');
+    } else {
+        // running in Browser
+        return '0x' + Array.prototype.map.call(arr_or_buf,
+            function (n) {
+                return n.toString(16);
+            }).join('');
+    }
+}
+
+
 exports.deferred_factory = deferred_factory;
 exports.promise = promise;
 exports.pack_uint256 = pack_uint256;
 exports.uuid = uuid;
+exports.hexlify = hexlify;

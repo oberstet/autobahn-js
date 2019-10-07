@@ -90,3 +90,4 @@ exports.sign_eip712_data = sign_eip712_data;
 exports.recover_eip712_signer = recover_eip712_signer;
 exports.decimals = decimals;
 exports.verifying_adr = verifying_adr;
+exports.utils = w3_utils;

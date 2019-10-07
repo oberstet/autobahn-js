@@ -79,8 +79,8 @@ build_browser_ab_host:
 	npm install --prefix ./packages/autobahn
 	JAVA_HOME=/usr/lib/jvm/default-java JS_COMPILER=${PWD}/packages/autobahn/node_modules/google-closure-compiler-java/compiler.jar scons -C ./packages/autobahn
 	ls -la packages/autobahn/build/
-	cp ./packages/autobahn/build/autobahn.js ~/scm/crossbario/dsq-examples/examples/js/browser/
-	cp ./packages/autobahn/build/autobahn.js ~/scm/crossbario/crossbar-examples/rlinks/ha_setup/web/
+	# cp ./packages/autobahn/build/autobahn.js ~/scm/crossbario/dsq-examples/examples/js/browser/
+	# cp ./packages/autobahn/build/autobahn.js ~/scm/crossbario/crossbar-examples/rlinks/ha_setup/web/
 
 # FIXME: fails at minimization
 #
@@ -94,8 +94,9 @@ build_browser_xbr_host:
 	npm install --prefix ./packages/autobahn-xbr
 	JAVA_HOME=/usr/lib/jvm/default-java JS_COMPILER=${PWD}/packages/autobahn/node_modules/google-closure-compiler-java/compiler.jar scons -C ./packages/autobahn-xbr
 	ls -la packages/autobahn-xbr/build/
-	cp ./packages/autobahn-xbr/build/autobahn-xbr.js ~/scm/crossbario/dsq-examples/examples/js/browser/
+	# cp ./packages/autobahn-xbr/build/autobahn-xbr.js ~/scm/crossbario/dsq-examples/examples/js/browser/
 	# cp ./packages/autobahn-xbr/build/autobahn-xbr.js ./test/xbr/onchain/
+	cp ./packages/autobahn-xbr/build/autobahn-xbr.js ../../xbr/xbr-www/web/static/autobahn-xbr/
 
 build_build_npm:
 	@echo "Ok, npm doesn't need a build step"
@@ -108,9 +109,10 @@ publish: publish_browser publish_npm
 
 publish_browser:
 	git -C ../autobahn-js-browser pull
-	cp ./packages/autobahn/build/* ../autobahn-js-browser/
-	cp ./packages/autobahn/build/* ../crossbar-examples/_shared-web-resources/autobahn/
-	cp ./packages/autobahn/build/* ../crossbarfx/test/_shared_web/autobahn/
+	cp ./packages/autobahn-xbr/build/* ../autobahn-js-browser/autobahn-xbr
+	cp ./packages/autobahn/build/* ../autobahn-js-browser/autobahn
+	# cp ./packages/autobahn/build/* ../crossbar-examples/_shared-web-resources/autobahn/
+	# cp ./packages/autobahn/build/* ../crossbarfx/test/_shared_web/autobahn/
 	@echo "Now commit and push these repos: autobahn-js-browser, crossbar-examples"
 
 publish_npm: build_npm
